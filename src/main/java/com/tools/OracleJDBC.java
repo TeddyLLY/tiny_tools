@@ -26,7 +26,7 @@ public class OracleJDBC
 
         // write log with time
         logger.info("begin time : " + LocalDateTime.now().format(formatter));
-        logger.info("------------------------------\n");
+        logger.info("------------------------------");
 
         try {
             // read config file
@@ -63,15 +63,16 @@ public class OracleJDBC
             // get connection
             Connection connection = DriverManager.getConnection(db_uri, db_username, db_password);
             PreparedStatement preparedStatement = connection.prepareStatement(jdbc_sql_command);
+
+            logger.info("Execute time -- " + LocalDateTime.now().format(formatter));
             ResultSet rs = preparedStatement.executeQuery();
+            logger.info("Finish task !! " + LocalDateTime.now().format(formatter));
 
             // Close resources
             rs.close();
             preparedStatement.close();
             connection.close();
 
-            // log part
-            logger.info("Finish task !! " + LocalDateTime.now().format(formatter));
         }catch (Exception e){
             logger.error("connection error : {}" , e);
         }
