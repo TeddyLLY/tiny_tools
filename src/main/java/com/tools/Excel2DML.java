@@ -7,14 +7,20 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.Iterator;
 
+/**
+ * @author teddylai
+ */
 public class Excel2DML {
 
+    //一行有幾個 column start with 0
+    final static int ExcelColumnCount = 19;
+    //int column
     final static int[] IntValueArray = {9,10,11};
+    //dml string (insert)
     final static String InsertString = " INSERT INTO customer_portal.legacy_customer (data_source,add_company,company_name,company_name_eng," +
             "tax_no,post_code,address,registration_phone,employees_number,industry_id,capital_amount,employee_name," +
             "position_title,employee_email,company_tel,extension,cellphone,remark,company_state) \n" ;
     public static void main(String[] args) {
-
         Excel2DML.getDataFromExcel(System.getProperty("user.dir") + "/excel.xlsx");
     }
 
@@ -57,7 +63,7 @@ public class Excel2DML {
                 while (rows.hasNext()) {
                     Row row = rows.next();
                     InsertSQL.append(" ( ");
-                        for(int i = 0 ; i< 19 ; i++){
+                        for(int i = 0 ; i< ExcelColumnCount ; i++){
                             try {
                                 row.getCell(i).setCellType(CellType.STRING);
                                 if(containsNumber(IntValueArray,i)){
@@ -76,7 +82,7 @@ public class Excel2DML {
                     InsertSQL.setLength(InsertSQL.length() - 1);
                     InsertSQL.append(" ) ,\n");
                 }//row end
-                InsertSQL.setLength(InsertSQL.length() - 1);
+                InsertSQL.setLength(InsertSQL.length() - 2);
                 InsertSQL.append(" ;");
                 writeMessageToFile(InsertSQL.toString());
             }//sheet end
