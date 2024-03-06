@@ -39,4 +39,5 @@ build/
 
 ### log ###
 *.log
+app.log
 logback*.gz

@@ -4,6 +4,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Iterator;
 
@@ -12,14 +13,16 @@ import java.util.Iterator;
  */
 public class Excel2DML {
 
-    //一行有幾個 column start with 0
-    final static int ExcelColumnCount = 19;
-    //int column
-    final static int[] IntValueArray = {9,10,11};
+    //一行有幾個 column start with 1
+    final static int ExcelColumnCount = 6;
+    //int column ( start with 0 )
+    final static int[] IntValueArray = {4};
+    //date column ( start with 0 )
+    final static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+    final static int[] DateValueArray = {3};
     //dml string (insert)
-    final static String InsertString = " INSERT INTO customer_portal.legacy_customer (data_source,add_company,company_name,company_name_eng," +
-            "tax_no,post_code,address,registration_phone,employees_number,industry_id,capital_amount,employee_name," +
-            "position_title,employee_email,company_tel,extension,cellphone,remark,company_state) \n" ;
+    final static String InsertString =
+    "INSERT INTO employee (first_name, last_name, email, hire_date, salary, department) \n";
     public static void main(String[] args) {
         Excel2DML.getDataFromExcel(System.getProperty("user.dir") + "/excel.xlsx");
     }
@@ -49,6 +52,8 @@ public class Excel2DML {
             }
 
             Iterator<Sheet> sheets = wookbook.sheetIterator();
+
+
             while (sheets.hasNext()) {
                 // 是否自增
                 Sheet sheet = sheets.next();
@@ -65,10 +70,13 @@ public class Excel2DML {
                     InsertSQL.append(" ( ");
                         for(int i = 0 ; i< ExcelColumnCount ; i++){
                             try {
-                                row.getCell(i).setCellType(CellType.STRING);
                                 if(containsNumber(IntValueArray,i)){
+                                    row.getCell(i).setCellType(CellType.STRING);
                                     InsertSQL.append( row.getCell(i).getStringCellValue() + ",");
+                                }else if(containsNumber(DateValueArray,i)){
+                                    InsertSQL.append( "'" + sdf.format(row.getCell(i).getDateCellValue())  + "'" + ",");
                                 }else{
+                                    row.getCell(i).setCellType(CellType.STRING);
                                     InsertSQL.append( "'" +row.getCell(i).getStringCellValue() + "'" + ",");
                                 }
                             } catch (NullPointerException e) {
