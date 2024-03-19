@@ -8,12 +8,12 @@
     # 開啟 multi threads 
     執行指定 sql 最後紀錄執行開始與完成時間
     
-    # 設定檔讀取路徑 ＆＆ log 輸出路徑為 jar 當前目錄\
+    # 設定檔讀取路徑 ＆＆ log 輸出路徑為 jar 當前目錄
     oracle_config.properties 記得移到跟打包後的 jar 同一路徑
 
 #### 2. Excel2DML.java
 ###### // 從 Excel 讀取並輸出 insert 語法
-    # dml.sql & excel.xlsx 讀取路徑 ＆＆ 輸出路徑為 jar 當前目錄\
+    # dml.sql & excel.xlsx 讀取路徑 ＆＆ 輸出路徑為 jar 當前目錄
 
 ---------------------------------------------------------------
 ### Script User Manual
