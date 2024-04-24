@@ -1,0 +1,53 @@
+### oracle with apple silicon 參考文件
+####################################################################################
+# https://github.com/gvenzl/oci-oracle-free#oracle-database-free-on-apple-m-chips
+
+
+### 安裝步驟
+####################################################################################
+## 安裝 colima 需要用 arm homebrew 記得檢查 (https://type.cyhsu.xyz/2020/12/use-homebred-on-m1-macs/)
+# install colima
+ arch -arm64 brew  install colima
+
+# run colima （before run oracle）
+ colima start --arch x86_64 --memory 4
+
+# pull image
+ docker pull gvenzl/oracle-free
+
+# run
+# --platform linux/amd64 , Apple Silicon 需要模擬轉譯才加
+ docker run -d -p 1521:1521 --name oracle  --platform linux/amd64 -e ORACLE_PASSWORD=1qaz@WSX -v oracle-volume:/opt/oracle/oradata gvenzl/oracle-free
+
+# create user
+docker exec oracle createAppUser apuser 1qaz@WSX  FREEPDB1
+
+# docker teminal
+docker exec -it oracle /bin/bash
+
+sqlplus /nolog
+    conn /as sysdba
+    SELECT * FROM v$version;
+    exit
+
+
+### 執行步驟
+####################################################################################
+# run colima （before run oracle）
+colima start --arch x86_64 --memory 4
+
+# see info
+docker images
+docker container ls -a
+
+# run docker
+docker stop oracle
+docker start oracle
+docker exec -it oracle /bin/bash
+
+
+### remove container
+####################################################################################
+docker stop oracle
+docker remove oracle
+docker container ls -a

@@ -2,7 +2,7 @@
 # !! 小小工具包 
 
 ### JAVA Class User Manual
-#### 1. OracleJDBC.java
+#### 1. ExecuteOracleDML.java
 ###### // 在 ORACLE 機器上執行 java class
     # 相關連線資訊由外部取得
     # 開啟 multi threads 
@@ -11,7 +11,7 @@
     # 設定檔讀取路徑 ＆＆ log 輸出路徑為 jar 當前目錄
     oracle_config.properties 記得移到跟打包後的 jar 同一路徑
 
-#### 2. Excel2DML.java
+#### 2. Excel2MySqlDML.java
 ###### // 從 Excel 讀取並輸出 insert 語法
     # dml.sql & excel.xlsx 讀取路徑 ＆＆ 輸出路徑為 jar 當前目錄
 
@@ -26,6 +26,7 @@
     mvn clean package
 
 ###### 切 root 執行 class 指令
-    java -cp tiny_tools-1.0-SNAPSHOT.jar com.tools.OracleJDBC
+###### // 執行時檢查下環境 java 版本 , 預設使用 java 8
+    java -cp tiny_tools-1.0-SNAPSHOT.jar com.tools.ExecuteOracleDML
 
 ---------------------------------------------------------------

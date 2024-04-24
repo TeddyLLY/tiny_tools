@@ -8,7 +8,7 @@
     docker run --name ldap-server  --hostname ldap-server \
     -p 389:389 -p 636:636  --detach  osixia/openldap:latest
 
-建立一個 phpLDAPadmin，所有設定為預設值。\
+建立一個 phpLDAPadmi－n，所有設定為預設值。\
 訪問網頁範例 , domain 為 docker 宿主機
 ###### https://192.168.56.133:6443/cmd.php?server_id=1&redirect=true
 ###### http://192.168.56.133:8087/cmd.php?server_id=1&redirect=true

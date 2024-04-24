@@ -11,7 +11,7 @@ import java.util.Iterator;
 /**
  * @author teddylai
  */
-public class Excel2DML {
+public class Excel2MySqlDML {
 
     //一行有幾個 column start with 1
     final static int ExcelColumnCount = 6;
@@ -24,7 +24,7 @@ public class Excel2DML {
     final static String InsertString =
     "INSERT INTO employee (first_name, last_name, email, hire_date, salary, department) \n";
     public static void main(String[] args) {
-        Excel2DML.getDataFromExcel(System.getProperty("user.dir") + "/excel.xlsx");
+        Excel2MySqlDML.getDataFromExcel(System.getProperty("user.dir") + "/excel.xlsx");
     }
 
 
@@ -95,7 +95,7 @@ public class Excel2DML {
                 writeMessageToFile(InsertSQL.toString());
             }//sheet end
 
-            System.out.println("运行成功");
+            System.out.println("success");
 
         } catch (Exception e) {
             e.printStackTrace();

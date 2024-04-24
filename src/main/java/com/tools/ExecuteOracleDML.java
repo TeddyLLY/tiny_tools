@@ -14,9 +14,9 @@ import java.util.concurrent.Executors;
 /**
  * @author teddylai
  */
-public class OracleJDBC
+public class ExecuteOracleDML
 {
-    private static final Logger logger = LogManager.getLogger(OracleJDBC.class);
+    private static final Logger logger = LogManager.getLogger(ExecuteOracleDML.class);
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
     private static final String currentDirectory = System.getProperty("user.dir");
     private static final String configPath = currentDirectory + "/oracle_config.properties" ;
